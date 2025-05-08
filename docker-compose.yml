@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  krx-checker:
+    build: .
+    container_name: krx-checker
+    volumes:
+      - ./logs:/app/logs
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+        max-file: "5"
+
+volumes:
+  logs:
+    driver: local
