@@ -173,6 +173,10 @@ class MQTTClient:
         else:
             logging.error(f'Failed to connect, return code {rc}')
 
+            #TODO login again if this happend
+            self.retry_failed_subscriptions()
+
+
     def on_disconnect(self, client, userdata, rc, properties=None):
         logging.info("Disconnected with result code: %s", rc)
         reconnect_count, reconnect_delay = 0, Config.FIRST_RECONNECT_DELAY
